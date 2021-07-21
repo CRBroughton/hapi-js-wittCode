@@ -35,6 +35,14 @@ const init = async () => {
         }
     })
 
+    server.route({
+        method: 'GET',
+        path: '/redirect',
+        handler: (request, h) => {
+            return h.redirect('/');
+        }
+    })
+
     await server.start();
     console.log(`server started on, ${server.info.uri}`)
 }
