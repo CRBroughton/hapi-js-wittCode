@@ -43,6 +43,14 @@ const init = async () => {
         }
     })
 
+    server.route({
+        method: 'GET',
+        path: '/{any*}',
+        handler: (request, h) => {
+            return "<h1>Oh no! You must be lost!</h1>"
+        }
+    })
+
     await server.start();
     console.log(`server started on, ${server.info.uri}`)
 }
