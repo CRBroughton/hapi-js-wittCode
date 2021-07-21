@@ -8,6 +8,13 @@ const init = async () => {
         port: 1234
     });
 
+    await server.register({
+        plugin: require('hapi-geo-locate'),
+        options: {
+            enabledByDefault: true
+        }
+    });
+
     server.route([{
         method: 'GET',
         path: '/',
@@ -15,6 +22,18 @@ const init = async () => {
             return "<h1>Hello World</h1>";
         }
     },
+    {
+        method: 'GET',
+        path: '/location',
+        handler: (request, h) => {
+            const location = request.location
+            if (location) {
+                console.log(location)
+                return location
+            }
+            return "<h1>Your location is not enabled by default!</h1>";
+        }
+      },
     {
         method: 'GET',
         path: '/users/{user?}',
