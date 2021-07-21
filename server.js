@@ -16,6 +16,15 @@ const init = async () => {
         }
     });
 
+    server.route({
+        method: 'GET',
+        path: '/users/{user?}',
+        handler: (request, h) => {
+            const user = request.params.user ? request.params.user : '';
+            return `<h1>Hello ${user}</h1>`;
+        }
+    })
+
     await server.start();
     console.log(`server started on, ${server.info.uri}`)
 }
