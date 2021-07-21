@@ -25,6 +25,16 @@ const init = async () => {
         }
     })
 
+    server.route({
+        method: 'GET',
+        path: '/query',
+        handler: (request, h) => {
+            const name = request.query.name ? request.query.name : '';
+            const lastname = request.query.lastname ? request.query.lastname : '';
+            return `<h1>${name} ${lastname}</h1>`;
+        }
+    })
+
     await server.start();
     console.log(`server started on, ${server.info.uri}`)
 }
