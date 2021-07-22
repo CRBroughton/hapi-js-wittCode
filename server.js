@@ -42,6 +42,14 @@ const init = async () => {
                 filename: 'welcome-download.html'
             });
         }
+      },{
+          method: 'POST',
+          path: '/login',
+          handler: (request, h) => {
+            console.log(request.payload.username)
+            console.log(request.payload.password)
+            return h.file('loggedin.html');
+          }
       },
     {
         method: 'GET',
