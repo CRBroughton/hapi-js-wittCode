@@ -65,9 +65,7 @@ const init = async () => {
           method: 'POST',
           path: '/login',
           handler: (request, h) => {
-            console.log(request.payload.username)
-            console.log(request.payload.password)
-            return h.file('loggedin.html');
+            return h.view('index', { username: request.payload.username })
           }
       },
     {
