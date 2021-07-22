@@ -30,7 +30,7 @@ const init = async () => {
 
     server.views({
         engines: {
-            html: require('handlebars')
+            hbs: require('handlebars')
         },
         path: path.join(__dirname, 'views')
     })
