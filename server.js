@@ -35,6 +35,16 @@ const init = async () => {
     },
     {
         method: 'GET',
+        path: '/download',
+        handler: (request, h) => {
+            return h.file('index.html', {
+                mode: 'attachment',
+                filename: 'welcome-download.html'
+            });
+        }
+      },
+    {
+        method: 'GET',
         path: '/location',
         handler: (request, h) => {
             const location = request.location
