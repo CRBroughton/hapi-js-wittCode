@@ -1,6 +1,7 @@
 'use strict';
 
 const Hapi = require('@hapi/hapi');
+const path = require('path');
 
 const init = async () => {
     const server = Hapi.Server({
@@ -24,7 +25,12 @@ const init = async () => {
         method: 'GET',
         path: '/',
         handler: (request, h) => {
-            return h.file('./index.html');
+            return h.file('index.html');
+        },
+        options: {
+            files: {
+                relativeTo: path.join(__dirname, 'static')
+            }
         }
     },
     {
