@@ -32,7 +32,8 @@ const init = async () => {
         engines: {
             hbs: require('handlebars')
         },
-        path: path.join(__dirname, 'views')
+        path: path.join(__dirname, 'views'),
+        layout: 'default',
     })
 
     server.route([{
@@ -72,11 +73,12 @@ const init = async () => {
         method: 'GET',
         path: '/location',
         handler: (request, h) => {
-            const location = request.location
+            const location = request.location.ip
             if (location) {
-                return location
+                return h.view('location', { location: request.location.ip });
+            } else {
+                return h.view('location', { location: 'Your location in not enabled'});
             }
-            return "<h1>Your location is not enabled by default!</h1>";
         }
       },
     {
