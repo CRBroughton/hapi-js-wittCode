@@ -6,7 +6,12 @@ const path = require('path');
 const init = async () => {
     const server = Hapi.Server({
         host: 'localhost',
-        port: 1234
+        port: 1234,
+        routes: {
+            files: {
+                relativeTo: path.join(__dirname, 'static')
+            }
+        }
     });
 
     await server.register([{
@@ -27,11 +32,6 @@ const init = async () => {
         handler: (request, h) => {
             return h.file('index.html');
         },
-        options: {
-            files: {
-                relativeTo: path.join(__dirname, 'static')
-            }
-        }
     },
     {
         method: 'GET',
