@@ -28,6 +28,12 @@ const init = async () => {
     }
 ]);
 
+    server.views({
+        engines: {
+            html: require('handlebars')
+        },
+        path: path.join(__dirname, 'views')
+    })
 
     server.route([{
         method: 'GET',
@@ -35,6 +41,15 @@ const init = async () => {
         handler: (request, h) => {
             return h.file('index.html');
         },
+    },{
+        method: 'GET',
+        path: '/dynamic',
+        handler: (request, h) => {
+            const data = {
+                name: 'wittCode'
+            }
+            return h.view('index', data)
+        }
     },
     {
         method: 'GET',
@@ -45,7 +60,8 @@ const init = async () => {
                 filename: 'welcome-download.html'
             });
         }
-      },{
+      },
+      {
           method: 'POST',
           path: '/login',
           handler: (request, h) => {
