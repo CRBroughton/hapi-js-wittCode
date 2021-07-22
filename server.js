@@ -39,7 +39,6 @@ const init = async () => {
         handler: (request, h) => {
             const location = request.location
             if (location) {
-                console.log(location)
                 return location
             }
             return "<h1>Your location is not enabled by default!</h1>";
@@ -49,7 +48,7 @@ const init = async () => {
         method: 'GET',
         path: '/users/{user?}',
         handler: (request, h) => {
-            const user = request.params.user ? request.params.user : '';
+            const user = request.params.user ? request.params.user : 'Stranger';
             return `<h1>Hello ${user}</h1>`;
         }
     },
