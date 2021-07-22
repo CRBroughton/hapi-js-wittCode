@@ -8,18 +8,23 @@ const init = async () => {
         port: 1234
     });
 
-    await server.register({
+    await server.register([{
         plugin: require('hapi-geo-locate'),
         options: {
             enabledByDefault: true
         }
-    });
+    },
+    {
+        plugin: require('@hapi/inert')
+    }
+]);
+
 
     server.route([{
         method: 'GET',
         path: '/',
         handler: (request, h) => {
-            return "<h1>Hello World</h1>";
+            return h.file('./index.html');
         }
     },
     {
