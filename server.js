@@ -5,6 +5,35 @@ const path = require('path');
 const Connection = require('./dbconfig');
 const Users = require('./models/users');
 
+const user = {
+    wittCode: {
+        username: 'wittCode',
+        password: 'soccer',
+        id: 0,
+        name: 'Witt Code'
+    },
+    Greg: {
+        username: 'Greg',
+        password: '1234',
+        id: 1,
+        name: 'Greg'
+    }
+};
+
+const validate = async (request, username, password, h) => {
+    if (!users[username]) {
+        return { isValid: false }
+    }
+
+    const user = users[username];
+
+    if (user.password === password) {
+        return { isValid: true, credentials: { id: user.id, name: user.name }}
+    } else {
+        return { isValid: false }
+    }
+}
+
 const init = async () => {
     const server = Hapi.Server({
         host: 'localhost',
@@ -27,8 +56,13 @@ const init = async () => {
     },
     {
         plugin: require('@hapi/vision')
-    }
+    },
+    {
+        plugin: require('@hapi/basic')
+    },
 ]);
+
+    server.auth.strategy('login', 'basic', { validate });
 
     server.views({
         engines: {
