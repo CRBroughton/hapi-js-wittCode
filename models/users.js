@@ -21,4 +21,6 @@ dbConnection.define('users', {
     timestamps: false
 })
 
-dbConnection.sync();
+dbConnection.drop().then(() => {
+    dbConnection.sync();
+})
