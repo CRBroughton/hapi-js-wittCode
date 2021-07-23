@@ -8,8 +8,15 @@ const sequelize = new Sequelize('hapi_tutorial', 'root', password, {
     dialect: 'mysql'
 });
 
-sequelize.authenticate().then(() => {
-    console.log('Connected!');
-}).catch(err => {
-    console.log('Could not connect :(');
-})
+async function testConnection() {
+    try {
+        await sequelize.authenticate();
+        console.log("Connected!")
+        const [results, metadata] = await sequelize.query('SELECT * FROM users');
+        console.log(results)
+    } catch (e) {
+        console.log("Can't connect to database :(")
+    }
+}
+
+testConnection();
