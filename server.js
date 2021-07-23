@@ -3,6 +3,7 @@
 const Hapi = require('@hapi/hapi');
 const path = require('path');
 const Connection = require('./dbconfig');
+const Users = require('./models/users');
 
 const init = async () => {
     const server = Hapi.Server({
@@ -76,6 +77,7 @@ const init = async () => {
           method: 'POST',
           path: '/login',
           handler: (request, h) => {
+            Users.createUser(request.payload.username, request.payload.password)
             return h.view('index', { username: request.payload.username })
           }
       },
