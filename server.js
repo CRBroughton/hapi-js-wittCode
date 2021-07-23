@@ -48,8 +48,7 @@ const init = async () => {
         method: 'GET',
         path: '/getUsers',
         handler: async (request, h) => {
-            const users = await Connection.getUsers();
-            console.log(users)
+            const dbConnection = await Connection.connect();
             return h.view('index', {users});
         }
     },
