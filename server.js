@@ -4,6 +4,7 @@ const Hapi = require('@hapi/hapi');
 const path = require('path');
 const Connection = require('./dbconfig');
 const Users = require('./models/users');
+const Boom = require('@hapi/boom');
 
 const users = {
     wittCode: {
@@ -112,6 +113,16 @@ const init = async () => {
         path: '/loginbasic',
         handler: (request, h) => {
             return "Welcome to my restricted page!";
+        },
+        options: {
+            auth: 'login'
+        }
+    },
+    {
+        method: 'GET',
+        path: '/logoutbasic',
+        handler: (request, h) => {
+            return Boom.unauthorized();
         },
         options: {
             auth: 'login'
