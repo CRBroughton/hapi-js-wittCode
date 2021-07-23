@@ -122,7 +122,7 @@ const init = async () => {
         method: 'GET',
         path: '/logoutbasic',
         handler: (request, h) => {
-            return Boom.unauthorized();
+            return Boom.unauthorized("You have been logged out");
         },
         options: {
             auth: 'login'
