@@ -65,6 +65,8 @@ const init = async () => {
 
     server.auth.strategy('login', 'basic', { validate });
 
+    server.auth.default('login')
+
     server.views({
         engines: {
             hbs: require('handlebars')
