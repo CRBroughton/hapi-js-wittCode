@@ -2,6 +2,7 @@
 
 const Hapi = require('@hapi/hapi');
 const path = require('path');
+const Connection = require('./dbconfig');
 
 const init = async () => {
     const server = Hapi.Server({
@@ -42,7 +43,17 @@ const init = async () => {
         handler: (request, h) => {
             return h.file('index.html');
         },
-    },{
+    },
+    {
+        method: 'GET',
+        path: '/getUsers',
+        handler: async (request, h) => {
+            const users = await Connection.getUsers();
+            console.log(users);
+            return "hi";
+        }
+    },
+    {
         method: 'GET',
         path: '/dynamic',
         handler: (request, h) => {
