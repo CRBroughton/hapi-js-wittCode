@@ -112,7 +112,8 @@ const init = async () => {
         method: 'GET',
         path: '/loginbasic',
         handler: (request, h) => {
-            return "Welcome to my restricted page!";
+            const name = request.auth.credentials.name
+            return `Welcome ${name} to my restricted page`
         },
         options: {
             auth: 'login'
