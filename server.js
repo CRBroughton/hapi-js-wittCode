@@ -5,7 +5,7 @@ const path = require('path');
 const Connection = require('./dbconfig');
 const Users = require('./models/users');
 
-const user = {
+const users = {
     wittCode: {
         username: 'wittCode',
         password: 'soccer',
@@ -107,6 +107,16 @@ const init = async () => {
             });
         }
       },
+      {
+        method: 'GET',
+        path: '/loginbasic',
+        handler: (request, h) => {
+            return "Welcome to my restricted page!";
+        },
+        options: {
+            auth: 'login'
+        }
+    },
       {
           method: 'POST',
           path: '/login',
